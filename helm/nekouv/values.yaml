@@ -1,0 +1,28 @@
+# Default values for the nekouv chart.
+# Override with: helm install nekouv ./helm/nekouv --set replicaCount=3
+
+replicaCount: 2
+
+image:
+  # Works out of the box. Replace with your own NekoUV image once it is built
+  # (and adjust containerPort / probe paths below).
+  repository: nginx
+  tag: "1.27-alpine"
+  pullPolicy: IfNotPresent
+
+containerPort: 80
+
+service:
+  type: NodePort
+  port: 80
+
+probes:
+  path: /
+
+resources:
+  requests:
+    cpu: 50m
+    memory: 64Mi
+  limits:
+    cpu: 200m
+    memory: 128Mi

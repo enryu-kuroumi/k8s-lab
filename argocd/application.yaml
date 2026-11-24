@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: nekouv
+  namespace: argocd
+spec:
+  project: default
+  source:
+    # Replace with the URL of YOUR repository (it must be reachable from the cluster).
+    repoURL: https://github.com/<YOUR_GITHUB_USER>/devops-lab.git
+    targetRevision: main
+    path: helm/nekouv
+    helm:
+      releaseName: nekouv
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: nekouv
+  syncPolicy:
+    automated:
+      prune: true      # delete resources that were removed from Git
+      selfHeal: true   # revert manual changes made directly in the cluster
+    syncOptions:
+      - CreateNamespace=true

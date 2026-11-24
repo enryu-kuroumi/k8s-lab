@@ -1,0 +1,6 @@
+apiVersion: v2
+name: nekouv
+description: Helm chart for the NekoUV demo app (learning lab)
+type: application
+version: 0.1.0
+appVersion: "1.27"
